@@ -27,6 +27,7 @@ export class RequestsComponent implements OnInit {
     //Defer
     this.getRandomCar();
     this.getRandomCar();
+    
   } 
 
   /* 
@@ -93,6 +94,9 @@ export class RequestsComponent implements OnInit {
 
   }
 
+
+  /* FROMEVENT */
+
   clcikEvent(){
     this.reqService.clickDetecter().subscribe(
       (res)=>{
@@ -129,6 +133,31 @@ export class RequestsComponent implements OnInit {
   getRandomCar(){
     this.reqService.getOneCar()
     .subscribe((res)=>{console.log("THIS IS THE CAR :> ",res)})
+  }
+
+
+  /* INTERVAL */
+
+  getIntervalObs(){
+    this.reqService.initCounterInterval()
+    .subscribe((x)=>{console.log(x)});
+  }
+
+  /* 
+    TIMER 
+    Executes something after x seconds 
+    acording to argument established on timer(x)
+  */
+  getObsTimer(){
+    this.reqService.initTimer().subscribe((x)=>{console.log("triggered");
+    })
+  }
+
+
+  /*  FILTER AND MAP */
+  filerNumbers(){
+    this.reqService.filterMapOperatiors()
+    .subscribe((x)=>console.log(x)); 
   }
 
 }

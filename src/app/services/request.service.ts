@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, fromEvent, defer } from 'rxjs';
+import { Observable, of, fromEvent, defer, interval, timer, pipe } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,20 @@ export class RequestService {
     return data$;
   }
 
+
+  getObserbaleRxJS(): Observable<number>{
+    const obs:Observable<number> = Observable.create(function (observer){
+      observer.next(1);
+      observer.next(2);
+      observer.next(3);
+      setTimeout(()=>{
+        observer.next(4);
+        observer.complete();
+      },1000);
+    })
+    return obs;
+  }
+
   /* 
     OF
 
@@ -54,7 +69,7 @@ export class RequestService {
       case "string":
         return of("Hello","World");
       case "number":
-        return of(1,3,5,6,7,89);
+        return of(1,2,5,6,7,89);
       case "array":
         return of(["Apple","Orange","Lime"],[3,4,5,,6])
       case "object":
@@ -110,6 +125,36 @@ export class RequestService {
     const cars = ["Bently","Bugatti","Ferrari","Cicitalia","Porche"];
     const ranomCarIndex = Math.floor((Math.random()*4));
     return defer(()=> of(cars[ranomCarIndex]));
+  }
+
+
+  /* TIMER */
+  initTimer(){
+    const timer$ = timer(1500);
+    return timer$; //returns an observable that waits 1.5 sec
+  }
+
+
+  /* INTERVAL */
+  initCounterInterval(){
+    const interval$ = interval(1000);
+    return interval$;
+  }
+
+
+  /* FILTER AND MAP */
+  filterMapOperatiors(){
+    const numArray$ = this.getObservableByType('number');
+
+    //pipe is function (encadenado de opradores) allow applyes a set of 
+    // operators on the data stream syncrounus, thats returning a new object
+    const filteredObs$ = pipe(
+      filter((n:number)=>n%2 === 0), //filter acording to an specifyc ondition
+      map((n) => n*n) // applies operation to elements
+    )
+    //onece data was filtered is returned to someone in order to getting subscribe
+
+    return filteredObs$(numArray$)             
   }
 
 
