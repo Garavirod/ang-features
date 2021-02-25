@@ -24,6 +24,9 @@ export class RequestsComponent implements OnInit {
     this.clcikEvent();
     this.scrollEvent();
     this.copyEvent();
+    //Defer
+    this.getRandomCar();
+    this.getRandomCar();
   } 
 
   /* 
@@ -119,6 +122,13 @@ export class RequestsComponent implements OnInit {
     );
   }
 
+  /* 
+    DEFER (Described on service)
+  */
 
+  getRandomCar(){
+    this.reqService.getOneCar()
+    .subscribe((res)=>{console.log("THIS IS THE CAR :> ",res)})
+  }
 
 }

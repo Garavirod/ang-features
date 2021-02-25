@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, fromEvent } from 'rxjs';
+import { Observable, of, fromEvent, defer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -94,6 +94,22 @@ export class RequestService {
   copyDetecter():Observable<Clipboard>{
     const clipboard$ = fromEvent<Clipboard>(document,"copy");
     return clipboard$;
+  }
+
+
+  /* 
+    DEFER 
+
+    We can create observable lazyload, this means each time we got 
+    a subscription it always is created a new observable.
+    unlike OF or FROM that always return the same.
+
+  */
+
+  getOneCar():Observable<string>{
+    const cars = ["Bently","Bugatti","Ferrari","Cicitalia","Porche"];
+    const ranomCarIndex = Math.floor((Math.random()*4));
+    return defer(()=> of(cars[ranomCarIndex]));
   }
 
 
