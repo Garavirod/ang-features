@@ -50,9 +50,14 @@ export class RequestService {
       observer.next(1);
       observer.next(2);
       observer.next(3);
+      if(false){ //any condition throw an error if you coonsdered like an error
+        observer.error('There was an error connection!');
+      }
+      //all that comes inmediatly afeter an error is not being executed
+      //if error is thrown
       setTimeout(()=>{
         observer.next(4);
-        observer.complete();
+        observer.complete(); //complete is just when all next were completed
       },1000);
     })
     return obs;

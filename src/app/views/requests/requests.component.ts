@@ -1,6 +1,6 @@
 import { RequestService } from './../../services/request.service';
 import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 @Component({
@@ -13,6 +13,8 @@ export class RequestsComponent implements OnInit {
   x:number;
   y:number;
   copied:string;
+
+  obsInterval$:Observable<number>;
 
   constructor(private reqService: RequestService) { }
 
@@ -139,9 +141,11 @@ export class RequestsComponent implements OnInit {
   /* INTERVAL */
 
   getIntervalObs(){
-    this.reqService.initCounterInterval()
-    .subscribe((x)=>{console.log(x)});
+    this.obsInterval$ = this.reqService.initCounterInterval();
+    this.obsInterval$.subscribe((x)=>{console.log(x)});
+    
   }
+
 
   /* 
     TIMER 
