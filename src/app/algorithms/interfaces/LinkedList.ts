@@ -2,10 +2,12 @@
 export class LinkedList{    
     private last:Node|null;
     private first:Node|null;
+    private size:number;
 
     constructor(){
         this.last = null;
         this.first = null;
+        this.size = 0;
     }
 
     public isEmpty(){
@@ -34,6 +36,21 @@ export class LinkedList{
     public removeFirst(){
         if(!this.isEmpty()){
             this.first = this.first.getNext();        
+        }
+    }
+
+    public getSize():number{        
+        this.size = 0;
+        if(!this.isEmpty()){
+            this.count(this.first);                
+        }
+        return this.size;                  
+    }
+
+    private count(n:Node){
+        this.size++;
+        if(n.getNext()!== null){
+            this.count(n.getNext());
         }
     }
 

@@ -28,7 +28,6 @@ export class LinkedListComponent implements OnInit {
     this.ln.printList();
   }
 
-
   removeFirstFromList(){
     this.ln.removeFirst();
     console.log("-------------");    
