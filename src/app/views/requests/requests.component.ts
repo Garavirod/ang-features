@@ -183,6 +183,16 @@ export class RequestsComponent implements OnInit {
   }
 
 
+  /* 
+    BUFFERTIME
+    (Desibred on ResquestServie)
+  */
+
+  startStorage(){
+    this.reqService.buffetTimeOper().subscribe(v=>console.log(v));
+  }
+
+
   /*  FILTER AND MAP */
   filerNumbers(){
     this.reqService.filterMapOperatiors()

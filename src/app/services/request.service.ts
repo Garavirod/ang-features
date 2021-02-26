@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, fromEvent, defer, interval, timer, pipe, range } from 'rxjs';
-import { filter, map, mapTo, share, tap } from 'rxjs/operators';
+import { bufferTime, filter, map, mapTo, share, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -140,10 +140,29 @@ export class RequestService {
   }
 
 
-  /* INTERVAL */
+  /* 
+    INTERVAL 
+
+    counts from 0 each x seconds interval(x)
+    
+  */
   initCounterInterval(){
-    const interval$ = interval(1000);
+    const interval$ = interval(500); //each one second it counts
     return interval$;
+  }
+
+
+  /* 
+    BUFFERTIME
+    Each certain quantity of time data is storgae in a buffer
+  */
+
+  buffetTimeOper(){
+    const timer$ = this.initCounterInterval();
+    const buff$ = timer$.pipe(
+      bufferTime(2000) //each 2 sec storage data into buffer
+    )
+    return buff$;
   }
 
 
