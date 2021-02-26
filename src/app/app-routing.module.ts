@@ -3,7 +3,22 @@ import { Routes, RouterModule } from '@angular/router';
 import { RequestsComponent } from './views/requests/requests.component';
 
 const routes: Routes = [
-  {path: 'request', component:RequestsComponent}
+  {path: 'rxjs-api', component:RequestsComponent},
+  /* 
+    LAZYLOAD CHILDREN ROOTS
+    Import module beaces there are all componentes, pipe, an other modules
+    that areusefull for all elements in that children routes
+  */
+  {
+    path: 'lazy-load', 
+    loadChildren: () => import('./auth/auth.module')
+    .then(m=>m.AuthModule)
+  },
+
+  {
+    path:'**',
+    redirectTo:'rxjs-api'
+  }
 ];
 
 @NgModule({
