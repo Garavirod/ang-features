@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, fromEvent, defer, interval, timer, pipe } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { Observable, of, fromEvent, defer, interval, timer, pipe, range } from 'rxjs';
+import { filter, map, mapTo, share, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -147,6 +147,17 @@ export class RequestService {
   }
 
 
+  /* 
+    RANGE 
+
+    It counts/print o do someting from x to yrange(x,y)
+  */
+
+  rangeObserver(){
+    return range(8,15);
+  }
+
+
   /* FILTER AND MAP */
   filterMapOperatiors(){
     const numArray$ = this.getObservableByType('number');
@@ -160,6 +171,35 @@ export class RequestService {
     //onece data was filtered is returned to someone in order to getting subscribe
 
     return filteredObs$(numArray$)             
+  }
+
+
+  /* 
+    SHARE 
+
+    This operator make that one observer being shared with many others
+    this way, observerable subscription is going to execute only once
+
+  */
+
+  sharedObserver(){
+    const timer$ = this.initTimer();
+
+    const obsFilterd$ = timer$.pipe(
+      tap(()=>console.log('tap on')),
+      mapTo('END OBS')
+    )    
+
+    //creates an shared observable
+    const obs =  obsFilterd$.pipe(share()); 
+
+    //Three subscriptions that share the same observable
+    obs.subscribe(c=>(console.log(c)))
+    obs.subscribe(c=>(console.log(c)))
+    obs.subscribe(c=>(console.log(c)))
+
+    
+    
   }
 
 

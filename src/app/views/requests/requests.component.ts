@@ -1,7 +1,7 @@
 import { RequestService } from './../../services/request.service';
 import { Component, OnInit } from '@angular/core';
-import { forkJoin, Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { concat, forkJoin, Observable } from 'rxjs';
+import { mergeMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-requests',
@@ -74,6 +74,31 @@ export class RequestsComponent implements OnInit {
          console.log(error);         
        }
      ) 
+  }
+
+
+  /* 
+  
+    CONCAT 
+
+    execute each observable one by one, when a obsrvable being completed
+    the second one is executed after that, it continues with
+    the third one this ways until finishing.
+    
+  */
+  exeConect(){
+    const obs$ = this.reqService.initCounterInterval().pipe(take(4));
+    const obs2$ = this.reqService.rangeObserver();
+
+    const result = concat(
+      obs$,
+      obs2$
+    );
+
+    result.subscribe(
+      (res)=>(console.log(res))
+    )
+
   }
 
 
@@ -162,6 +187,14 @@ export class RequestsComponent implements OnInit {
   filerNumbers(){
     this.reqService.filterMapOperatiors()
     .subscribe((x)=>console.log(x)); 
+  }
+
+  /* 
+    SHARE
+  */
+
+  useShareObs(){
+    this.reqService.sharedObserver();    
   }
 
 }
