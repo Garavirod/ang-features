@@ -1,0 +1,10 @@
+<h1>Sorting</h1>
+
+<input #item type="text" placeholder="item to search">
+<button (click)="searchByBinarySearch(item)">Search</button>
+<p>Index element : {{index}}</p>
+<br>
+<button (click)="SortByQuickSort()">QuickSort</button>
+<ul>
+    <li *ngFor="let i of arr">{{i}}</li>
+</ul>
