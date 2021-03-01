@@ -1,6 +1,4 @@
 export interface Graph{
-    edges:number;
-    vertex:number;    
     fillGraph(...values:any[]):void;
     printGraph():void;
     
@@ -8,39 +6,42 @@ export interface Graph{
 
 
 //Non ponderated graph
-export class AdMatrixGraph implements Graph{
-    //Override
-    edges:number;
-    vertex:number;
-    matrix:Array<Array<boolean>>;
-    constructor(e:number, v:number){
-        this.edges = e;
-        this.vertex = v;
-        this.setFillMatrix();
-    }
+export class AdyacentNonPonMatrixGraph implements Graph{
 
-    private setFillMatrix( ):void{
-        for(let i = 0; i < this.vertex; i++){
-            for(let j = 0; this.edges; j++){
-                this.matrix[i][j] = false;
-            }
-        }
+    matrix:Array<Array<any>>;
+    constructor(v:number){
+        this.matrix = new Array(v).fill(0).map(() => new Array(v).fill(0));        
     }
 
     //Override
     fillGraph(v1:number, v2:number):void{
-        this.matrix[v1-1][v2-1] = true;
+        this.matrix[v1-1][v2-1] = 1;
+        this.printGraph();
     }
 
     //Override
-    printGraph():void{
-        let str = "";
-        for(let i = 0; i < this.vertex; i++){
-            for(let j = 0; this.edges; j++){
-                str += `${this.matrix[i][j]} `;                
-            }
-            str + "\n";
-        }
-        console.log(str);        
+    printGraph():void{        
+        console.log(this.matrix);        
     }
 }
+
+
+export class AdyacentPonMatGraph implements Graph{
+
+     matrix:Array<Array<any>>;
+     constructor(v:number){
+         this.matrix = new Array(v).fill(0).map(() => new Array(v).fill(0));        
+     }
+ 
+     //Override
+     fillGraph(v1:number, v2:number, w:number):void{
+         this.matrix[v1-1][v2-1] = w;
+         this.printGraph();
+     }
+ 
+     //Override
+     printGraph():void{        
+         console.log(this.matrix);        
+     }
+}
+

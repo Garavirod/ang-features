@@ -6,10 +6,11 @@ import { LinkedListComponent } from './views/linked-list/linked-list.component';
 import { QueueComponent } from './views/queue/queue.component';
 import { HeapComponent } from './views/heap/heap.component';
 import { SortingComponent } from './views/sorting/sorting.component';
+import { GraphsComponent } from './views/graphs/graphs.component';
 
 
 @NgModule({
-  declarations: [LinkedListComponent, QueueComponent, HeapComponent, SortingComponent],
+  declarations: [LinkedListComponent, QueueComponent, HeapComponent, SortingComponent, GraphsComponent],
   imports: [
     CommonModule,
     AlgorithmsRoutingModule

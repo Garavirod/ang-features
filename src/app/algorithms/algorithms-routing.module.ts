@@ -4,6 +4,7 @@ import { LinkedListComponent } from './views/linked-list/linked-list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SortingComponent } from './views/sorting/sorting.component';
+import { GraphsComponent } from './views/graphs/graphs.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
       {path:'queue', component: QueueComponent},
       {path:'heap', component: HeapComponent},
       {path:'sorting', component: SortingComponent},
+      {path:'graphs', component: GraphsComponent},
       {path:'**', redirectTo:'linkedList'},
 
     ]          
