@@ -1,4 +1,4 @@
-import { Heap } from './../../interfaces/Heap';
+import { Heap } from '../../datastructures/Heap';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

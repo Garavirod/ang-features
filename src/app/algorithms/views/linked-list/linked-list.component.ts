@@ -1,4 +1,4 @@
-import { LinkedList } from '../../interfaces/LinkedList';
+import { LinkedList } from '../../datastructures/LinkedList';
 
 import { Component, OnInit } from '@angular/core';
 

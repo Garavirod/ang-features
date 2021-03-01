@@ -1,4 +1,4 @@
-import { Queue } from './../../interfaces/Queue';
+import { Queue } from '../../datastructures/Queue';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
