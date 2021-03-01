@@ -7,5 +7,5 @@
 <button (click)="SortByQuickSort()">QuickSort</button>
 <button (click)="SortByMergeSort()">MergeSort</button>
 <ul>
-    <li *ngFor="let i of arr">{{i}}</li>
+    <li *ngFor="let i of arr; let idx = index;">{{idx}} - {{i}}</li>
 </ul>
