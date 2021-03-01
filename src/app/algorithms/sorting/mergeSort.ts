@@ -25,8 +25,8 @@ function merge(a:Array<number>, b:Array<number>):Array<number>{
         }
     }
     //remaining
-    /* c = c.concat(a.slice(j));    
-    c = c.concat(b.slice(i));  */   
+    c = c.concat(a.slice(j));    
+    c = c.concat(b.slice(i));    
             
     return c; //return an array sorted and merged
 }
