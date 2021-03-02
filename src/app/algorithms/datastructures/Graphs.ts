@@ -1,7 +1,9 @@
+import { Queue } from "./Queue";
+
 export interface Graph{
     fillGraph(...values:any[]):void;
     printGraph():void;
-    
+    BFS(vertex:number):void;
 }
 
 
@@ -27,6 +29,10 @@ export class AdyacentNonPonMatrixGraph implements Graph{
     printGraph():void{        
         console.log(this.matrix);        
     }
+
+    BFS():void{}
+
+
 }
 
 //Ponderated graph
@@ -47,6 +53,8 @@ export class AdyacentPonMatGraph implements Graph{
      printGraph():void{        
          console.log(this.matrix);        
      }
+
+     BFS():void{}
 }
 
 /* 
@@ -67,21 +75,44 @@ export class AdyacentPonMatGraph implements Graph{
 
 export class AdyacentListGraph implements Graph{
     /* Override */
-    matrix:Array<any>;
-
+    matrix:Array<Array<any>>;
+    numVertex:number;
     constructor(numVertex:number){
-        this.matrix = new Array(numVertex).fill(null);
-        
+        this.numVertex = numVertex;
+        this.matrix = new Array(numVertex).fill([]);        
     }
 
     /* Override */
     fillGraph(vertex:number, vertexes:Array<any>):void{
-        this.matrix[vertex-1] = vertexes;
+        this.matrix[vertex] = vertexes;
         this.printGraph();
     }
     /* Override */
     printGraph():void{
         console.log(this.matrix);        
+    }
+
+    //complexity O(V+E)
+    //Breadth fisrt search (búsqueda en anchura)
+    BFS(vertex:number):void{
+        let visited = new Array(this.numVertex).fill(-1);
+        let queue = new Queue();
+        let u:any,v:any;
+        queue.addToQueue(vertex-1);
+        visited[vertex-1] = 0;
+        while(!queue.isEmpty()){
+            u = queue.getFirst();
+            queue.removeFirst();
+            for(let i = 0; i<this.matrix[u].length; i++){
+                v = this.matrix[u][i];
+                if(visited[v] == -1){
+                    visited[v] = visited[u]  + 1;
+                    queue.addToQueue(v);
+                }
+            }
+        }
+        console.log(visited);
+        
     }
 }
 
@@ -113,4 +144,8 @@ export class EdgetListGraph implements Graph{
     printGraph():void{
         console.log(this.matrix);        
     }
+
+    BFS():void{}
 }
+
+

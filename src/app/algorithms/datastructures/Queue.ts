@@ -47,6 +47,10 @@ export class Queue{
         }
     }
 
+    public getFirst():any{
+        return this.first.getItem();        
+    }
+
     public printQueue():void{
         if(!this.isEmpty()){
             this.printNode(this.first);
