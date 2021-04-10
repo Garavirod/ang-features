@@ -228,7 +228,10 @@ export class RequestService {
   
   switchMapOperator(){
     fromEvent(document,'click').pipe( 
-      switchMap(() => interval(1000))) // interrupt the previuos stream to start again
+      switchMap(
+        // all stream insed wicthmap is interrupted when being neccessary
+        () => interval(1000)
+      )) // interrupt the previuos stream to start again
       .subscribe(console.log);    
   }
 
