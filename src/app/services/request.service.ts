@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, fromEvent, defer, interval, timer, pipe, range } from 'rxjs';
-import { bufferTime, filter, map, mapTo, share, tap } from 'rxjs/operators';
+import { bufferTime, filter, map, mapTo, share, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -219,6 +219,17 @@ export class RequestService {
 
     
     
+  }
+
+  /*  
+    SWITCHMAP 
+    allow to interrupt a strem and continus again    
+  */
+  
+  switchMapOperator(){
+    fromEvent(document,'click').pipe( 
+      switchMap(() => interval(1000))) // interrupt the previuos stream to start again
+      .subscribe(console.log);    
   }
 
 
